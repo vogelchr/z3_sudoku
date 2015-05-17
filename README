@@ -1,0 +1,57 @@
+A sudoku solver using the Microsoft Z3 SAT Engine, written in Python.
+
+Just playing with the Z3 engine from microsoft.
+
+Given a input file such as the following:
+
+	..71.8.9.
+	49..7..1.
+	..84..3.7
+	9.....5.3
+	.2.....4.
+	7.3.....1
+	2.9..41..
+	.3..9..74
+	.4.7.32..
+
+You can solve the sudoku running 
+
+	$ ./z3_sudoku.py sudokufile.txt
+
+	Generating solver...
+	Adding board constraint to solver...
+	. . 7 1 . 8 . 9 .
+	4 9 . . 7 . . 1 .
+	. . 8 4 . . 3 . 7
+	9 . . . . . 5 . 3
+	. 2 . . . . . 4 .
+	7 . 3 . . . . . 1
+	2 . 9 . . 4 1 . .
+	. 3 . . 9 . . 7 4
+	. 4 . 7 . 3 2 . .
+	Checking solver...
+	Solver: is solvable? sat
+	3 5 7 1 6 8 4 9 2
+	4 9 2 3 7 5 8 1 6
+	6 1 8 4 2 9 3 5 7
+	9 6 4 8 1 7 5 2 3
+	5 2 1 9 3 6 7 4 8
+	7 8 3 5 4 2 9 6 1
+	2 7 9 6 8 4 1 3 5
+	8 3 5 2 9 1 6 7 4
+	1 4 6 7 5 3 2 8 9
+
+If you want, you can dump out the generated constraints in the native
+z3 file format (smt2):
+
+	$ ./z3_sudoku.py -s dummy.smt2 sudoku.txt
+	(...)
+	; benchmark generated from python API
+	$ head dummy.smt2
+	(set-info :status unknown)
+	(declare-fun r0c0 () Int)
+	(declare-fun r0c1 () Int)
+	(declare-fun r0c2 () Int)
+
+
+Christian Vogel <vogelchr@vogel.cx>
